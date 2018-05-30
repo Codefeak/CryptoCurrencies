@@ -1,0 +1,64 @@
+*{
+  color:white;
+  background: transparent;
+}
+
+.main-container{
+  margin:0;
+  padding:0;
+  display:grid;
+  grid-template-columns: 20% 80%;
+  background-image: url('../blockchain.png');
+  background-repeat: no-repeat;
+  /* background-color: black; */
+  background-blend-mode: luminosity;
+}
+
+.main-container>h1{
+  text-align: center;
+  grid-column: 1/3;
+  box-shadow: 1px 1px 2px 1px;
+  margin:0;
+  text-shadow: 2px 2px 7px black;
+}
+
+.side-bar{
+  grid-row: 2;
+  border-right: 1px solid red;
+}
+
+ul{
+  height: 80vh;
+  list-style: none;
+  display:flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  overflow: scroll;
+  overflow-x: hidden;
+}
+
+ul::-webkit-scrollbar{
+
+}
+
+li{
+  width:10vw;
+  background:linear-gradient(#4465ea82, #001233a8);;
+  margin:2vw;
+  text-align: center;
+  box-shadow: 1px 1px 20px 5px;
+}
+
+li>img{
+margin:0.5vh;  
+}
+
+li>h3{
+  color: #d4ea82;
+    text-shadow: 2px 2px 7px black;
+}
+
+hr{
+  background-color: grey;
+  border-color: grey;
+}
