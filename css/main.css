@@ -50,9 +50,17 @@ button{
   margin:1vw;
 }
 
+.card-info{
+  /*display:none;*/
+}
+
 .disp-header{
   display: flex;
   flex-direction: row;
+}
+
+h2{
+  margin: 1vw 1vw 1vw 5vw;  
 }
 
 .fa-sort-amount-up{
@@ -87,6 +95,7 @@ ul{
   flex-wrap: wrap;
   overflow: scroll;
   overflow-x: hidden;
+  margin-top: 0;
 }
 
 ul::-webkit-scrollbar{

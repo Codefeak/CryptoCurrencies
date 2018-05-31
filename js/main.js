@@ -1,6 +1,5 @@
 const ul  = document.getElementById('currencies');
 const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
-let tempUl = ul;
 
 
 document.addEventListener('click', handleClick);
@@ -13,7 +12,6 @@ fetch(url)
     })
 
     .then(data => {
-
       return data.map(currency =>{
         renderData(currency);
       })
@@ -120,7 +118,7 @@ function sortByNameAsc(){
            if (nameA > nameB) {
              return -1;
            }
- return 0;
+            return 0;
         });
         return data.map(currency => {
           renderData(currency)
@@ -217,24 +215,40 @@ function search(){
   temp.forEach(function(item){
     ul.appendChild(item);
   })
-      // append(ul,temp);
-  // data.forEach(function(data){
-  //   if(data.firstChild){
-  //     if(data.childNodes[3].innerHTML.toLowerCase().includes(input.value)){
-  //       console.dir(data.childNodes[3]);
-  //       console.dir(
-  //         )
-  //       tempUl.appendChild(data.childNodes[3]);
-  //     }
-  //      // if((data.childNodes[3].innerHTML.includes(input.value)||
-  //      //         data.childNodes[1].innerHTML.includes(input.value.toUpperCase()))&&
-  //      //  input.value!==""){
-  //      //    ul.innerHTML="";
-  //      //  console.log(data);
-  //      //    // ul.appendChild(element);
-  //      //  }
-  //   }
-  // })
+}
+
+function cardInfo(e){
+  fetch(url)
+        .then(function(response){
+          return response.json();
+      }).then(function(data){
+        const temp = data.filter(function(element){
+          // console.log(element.symbol) ;
+              // console.log(e.target.childNodes[1]) ;
+          // console.log(element.symbol===e.target.childNodes[1].innerHTML) ;
+          if(element.symbol==e.target.childNodes[1].innerHTML)return element;
+        })
+         console.log(temp[0]);
+         console.dir(e.target.childNodes[0].src);
+         const tempImg = e.target.childNodes[0].src;
+         document.querySelector('.card-info').classList.add('show');
+         document.querySelector('#logo-one').src= tempImg;
+         document.querySelector('#id').innerHTML=`${temp[0].id}`;
+         document.querySelector('#name').innerHTML=`${temp[0].name}`;
+         document.querySelector('#symbol').innerHTML=`${temp[0].symbol}`;
+         document.querySelector('#rank').innerHTML=`${temp[0].rank}`;
+         document.querySelector('#price-usd').innerHTML=`${temp[0].price_usd}`;
+         document.querySelector('#price-bit').innerHTML=`${temp[0].price_btc}`;
+         document.querySelector('#vol-usd').innerHTML=`${temp[0]['24h_volume_usd']}`;
+         document.querySelector('#market-cap').innerHTML=`${temp[0].market_cap_usd}`;
+         document.querySelector('#available').innerHTML=`${temp[0].available_supply}`;
+         document.querySelector('#total-supply').innerHTML=`${temp[0].total_supply}`;
+         document.querySelector('#max-supply').innerHTML=`${temp[0].max_supply}`;
+         document.querySelector('#change-1d').innerHTML=`${temp[0].percent_change_1h}`;
+         document.querySelector('#change-24h').innerHTML=`${temp[0].percent_change_24h}`;
+         document.querySelector('#change-7d').innerHTML=`${temp[0].percent_change_7d}`;
+         document.querySelector('#last-updated').innerHTML=`${temp[0].last_updated}`;
+      })
 }
 
 function ascIcon(){
@@ -257,7 +271,9 @@ function handleClick(e){
   if(e.target.id === 'sort-price')
     toggleSortPrice();
   if(e.target.id ==="search")
-  search();
+    search();
+  if(e.target.className ==="cards")
+    cardInfo(e);
 }
 
 function handleInput(e){
@@ -268,7 +284,7 @@ function handleInput(e){
 }
 
 function handleKeyDown(e){
-  if(e.target.keyCodes ===8){
+  if(e.target.keyCodes ===13){
     search();
   }
 }
