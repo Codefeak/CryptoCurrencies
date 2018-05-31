@@ -12,10 +12,7 @@
   background-repeat: no-repeat;
   /* background-color: black; */
   background-blend-mode: luminosity;
-<<<<<<< HEAD
   background-size: cover;
-=======
->>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
 }
 
 .main-container>h1{
@@ -29,7 +26,6 @@
 .side-bar{
   grid-row: 2;
   border-right: 1px solid red;
-<<<<<<< HEAD
   display: flex;
   flex-direction: column;
 }
@@ -81,8 +77,6 @@ button{
 
 .hide{
   display: none;
-=======
->>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
 }
 
 ul{
@@ -99,7 +93,6 @@ ul::-webkit-scrollbar{
 
 }
 
-<<<<<<< HEAD
 
 
 .cards{
@@ -115,18 +108,6 @@ ul::-webkit-scrollbar{
 
 li>img{
 margin:0.5vh;
-=======
-li{
-  width:10vw;
-  background:linear-gradient(#4465ea82, #001233a8);;
-  margin:2vw;
-  text-align: center;
-  box-shadow: 1px 1px 20px 5px;
-}
-
-li>img{
-margin:0.5vh;  
->>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
 }
 
 li>h3{
@@ -134,7 +115,6 @@ li>h3{
     text-shadow: 2px 2px 7px black;
 }
 
-<<<<<<< HEAD
 /* hr, .hr-std{
   background-color: grey;
   border-color: grey;
@@ -143,9 +123,3 @@ li>h3{
 hr{
   border-image:
       linear-gradient(to top, black, rgba(0, 0, 0, 0)) 1 100%;
-=======
-hr{
-  background-color: grey;
-  border-color: grey;
->>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
-}
