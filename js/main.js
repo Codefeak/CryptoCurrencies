@@ -1,4 +1,5 @@
 const ul  = document.getElementById('currencies');
+<<<<<<< HEAD
 const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
 let tempUl = ul;
 
@@ -6,6 +7,12 @@ let tempUl = ul;
 document.addEventListener('click', handleClick);
 document.addEventListener('input', handleInput);
 document.addEventListener('keydown', handleKeyDown);
+=======
+const url = "https://api.coinmarketcap.com/v1/ticker/?limit=50";
+
+
+document.addEventListener('click', handleClick);
+>>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
 
 fetch(url)
     .then(function(response) {
@@ -36,8 +43,12 @@ function renderData(currency){
       symbol = createNode('h3');
       hr = createNode('hr');
       priceInUsd = createNode('p');
+<<<<<<< HEAD
       li.className = 'cards'
       img.src = "images/icon/"+currency.symbol.toLowerCase()+".png";
+=======
+      img.src = "https://s2.coinmarketcap.com/static/img/coins/16x16/"+currency.rank+".png";
+>>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
       spanName.innerHTML = `${currency.name}`;
       symbol.innerHTML = `${currency.symbol}`;
       priceInUsd.innerHTML = `${'$'}${currency.price_usd}`;
@@ -49,6 +60,7 @@ function renderData(currency){
       append(ul, li);
 };
 
+<<<<<<< HEAD
 function toggleSortName(e){
   if(ul.className==='asc'|| ul.className!=='dsc'){
     sortByNameDsc();
@@ -103,11 +115,15 @@ function sortByNameDsc(){
 
 
 function sortByNameAsc(){
+=======
+function sortByName(){
+>>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
   fetch(url)
         .then(function(response){
           return response.json();
       })
       .then(data => {
+<<<<<<< HEAD
         ul.innerHTML="";
         ul.className = "asc";
         ascIcon();
@@ -129,11 +145,21 @@ function sortByNameAsc(){
 }
 
 function sortByRankDsc(){
+=======
+        data.map(currency=> currency.name).sort();
+        ul.innerHTML="";
+        return data.map(currency => {renderData(currency)}) 
+      })
+}
+
+function sortByRank(){
+>>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
   fetch(url)
         .then(function(response){
           return response.json();
       })
       .then(data => {
+<<<<<<< HEAD
         ul.innerHTML="";
         ul.className = "dsc";
         dscIcon();
@@ -147,11 +173,20 @@ function sortByRankDsc(){
 }
 
 function sortByRankAsc(){
+=======
+        const rank = data.map(currency=> currency.rank);
+        rank.sort();
+      })
+}
+
+function sortByPrice(){
+>>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
   fetch(url)
         .then(function(response){
           return response.json();
       })
       .then(data => {
+<<<<<<< HEAD
         ul.innerHTML="";
         ul.className = "asc";
         ascIcon();
@@ -272,3 +307,19 @@ function handleKeyDown(e){
     search();
   }
 }
+=======
+        const price = data.map(currency=> currency.price);
+        price.sort();
+      })
+}
+
+function handleClick(e){
+  console.log(e.target);
+  if(e.target.id ==='sort-name'){
+    sortByName();
+  if(e.target.id ==='sort-rank'){
+    sortByRank();
+  }
+  }
+}
+>>>>>>> f947b90865ee3b34c0d9ac8a368a492a9721a13a
