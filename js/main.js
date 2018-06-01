@@ -1,10 +1,10 @@
 const ul  = document.getElementById('currencies');
 const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
-
+let data=[];
 
 document.addEventListener('click', handleClick);
 document.addEventListener('input', handleInput);
-document.addEventListener('keydown', handleKeyDown);
+document.addEventListener('keydown', handleKeyPress);
 
 fetch(url)
     .then(function(response) {
@@ -14,9 +14,14 @@ fetch(url)
     .then(data => {
       return data.map(currency =>{
         renderData(currency);
+        getData(currency);
       })
     }
 );
+
+function getData(inf){
+  return data.push(inf);
+}
 
 
 function createNode(element){
@@ -163,11 +168,11 @@ function sortByRankAsc(){
 }
 
 function sortByPriceAsc(){
-  fetch(url)
-        .then(function(response){
-          return response.json();
-      })
-      .then(data => {
+  // fetch(url)
+  //       .then(function(response){
+  //         return response.json();
+  //     })
+  //     .then(data => {
         ul.innerHTML="";
         ul.className = "asc";
         ascIcon();
@@ -177,7 +182,7 @@ function sortByPriceAsc(){
         return data.map(currency=> {
         renderData(currency);
         })
-      })
+  //     })
 }
 
 function sortByPriceDsc(){
@@ -199,21 +204,20 @@ function sortByPriceDsc(){
 }
 
 function search(){
+ 
   const input = document.querySelector('#input');
-  const data = ul.childNodes;
-  const temp = Array.from(data).filter(function(data){
-    if(data.firstChild){
-      if(data.childNodes[3].innerHTML.toLowerCase().includes(input.value)||
-        data.childNodes[1].innerHTML.includes(input.value.toUpperCase())&&
-        input.value!==""){
-        return data;
-      }
-    }
-  });
-  console.dir(temp);
+  const temp = data.filter(function(element){
+                  if(element.symbol.toLowerCase().includes(input.value)||
+                    element.name.includes(input.value.toUpperCase())&&
+                    input.value!==""){
+                      return element;
+                    }
+                  });
   ul.innerHTML="";
+
   temp.forEach(function(item){
-    ul.appendChild(item);
+    console.log(item);
+    renderData(item);
   })
 }
 
@@ -223,9 +227,6 @@ function cardInfo(e){
           return response.json();
       }).then(function(data){
         const temp = data.filter(function(element){
-          // console.log(element.symbol) ;
-              // console.log(e.target.childNodes[1]) ;
-          // console.log(element.symbol===e.target.childNodes[1].innerHTML) ;
           if(element.symbol==e.target.childNodes[1].innerHTML)return element;
         })
          console.log(temp[0]);
@@ -274,6 +275,8 @@ function handleClick(e){
     search();
   if(e.target.className ==="cards")
     cardInfo(e);
+  if(e.target.id ==="currencies")
+    document.querySelector('.card-info').classList.remove('show');
 }
 
 function handleInput(e){
@@ -283,8 +286,14 @@ function handleInput(e){
   }
 }
 
-function handleKeyDown(e){
-  if(e.target.keyCodes ===13){
-    search();
+function handleKeyPress(e){
+  if(e.target.id === 'input'){
+    if(e.keyCode ===13){
+      search();
+    }
+    if(e.keyCode===8){
+      search();
+    }
   }
 }
+
