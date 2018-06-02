@@ -1,3 +1,3 @@
 ##CryptoCurrencies
 
-#Live-Link(https://github.com/Codefeak/CryptoCurrencies)
+#Live-Link(https://Codefeak.github.io/CryptoCurrencies)
