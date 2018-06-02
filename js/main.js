@@ -1,5 +1,5 @@
 const ul  = document.getElementById('currencies');
-const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
+const url = "https://api.coinmarketcap.com/v1/ticker/?limit=200";
 let data=[];
 
 document.addEventListener('click', handleClick);
@@ -10,7 +10,6 @@ fetch(url)
     .then(function(response) {
       return response.json();
     })
-
     .then(data => {
       return data.map(currency =>{
         renderData(currency);
@@ -22,7 +21,6 @@ fetch(url)
 function getData(inf){
   return data.push(inf);
 }
-
 
 function createNode(element){
   return document.createElement(element);
@@ -103,8 +101,6 @@ function sortByNameDsc(){
       })
 }
 
-
-
 function sortByNameAsc(){
   fetch(url)
         .then(function(response){
@@ -168,12 +164,7 @@ function sortByRankAsc(){
 }
 
 function sortByPriceAsc(){
-  // fetch(url)
-  //       .then(function(response){
-  //         return response.json();
-  //     })
-  //     .then(data => {
-        ul.innerHTML="";
+         ul.innerHTML="";
         ul.className = "asc";
         ascIcon();
         data.sort(function(a,b){
@@ -182,7 +173,6 @@ function sortByPriceAsc(){
         return data.map(currency=> {
         renderData(currency);
         })
-  //     })
 }
 
 function sortByPriceDsc(){
@@ -204,7 +194,6 @@ function sortByPriceDsc(){
 }
 
 function search(){
- 
   const input = document.querySelector('#input');
   const temp = data.filter(function(element){
                   if(element.symbol.toLowerCase().includes(input.value)||
@@ -214,7 +203,6 @@ function search(){
                     }
                   });
   ul.innerHTML="";
-
   temp.forEach(function(item){
     console.log(item);
     renderData(item);
