@@ -1,5 +1,5 @@
 const ul  = document.getElementById('currencies');
-const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
+const url = "https://api.coinmarketcap.com/v1/ticker/?limit=2000";
 let data=[];
 let temp;
 
