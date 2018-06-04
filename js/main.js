@@ -1,5 +1,5 @@
 const ul  = document.getElementById('currencies');
-const url = "https://api.coinmarketcap.com/v1/ticker/?limit=200";
+const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
 let data=[];
 
 document.addEventListener('click', handleClick);
@@ -38,7 +38,7 @@ function renderData(currency){
       hr = createNode('hr');
       priceInUsd = createNode('p');
       li.className = 'cards'
-      img.src = "images/icon/"+currency.symbol.toLowerCase()+".png";
+      img.src = "images/32x32/"+currency.id.toLowerCase()+".png";
       spanName.innerHTML = `${currency.name}`;
       symbol.innerHTML = `${currency.symbol}`;
       priceInUsd.innerHTML = `${'$'}${currency.price_usd}`;
@@ -50,7 +50,7 @@ function renderData(currency){
       append(ul, li);
 };
 
-function toggleSortName(e){
+function toggleSortName(){
   if(ul.className==='asc'|| ul.className!=='dsc'){
     sortByNameDsc();
   }else{
@@ -58,7 +58,7 @@ function toggleSortName(e){
   }
 }
 
-function toggleSortRank(e){
+function toggleSortRank(){
   if(ul.className==='asc'|| ul.className!=='dsc'){
     sortByRankDsc();
 
@@ -67,7 +67,7 @@ function toggleSortRank(e){
   }
 }
 
-function toggleSortPrice(e){
+function toggleSortPrice(){
   if(ul.className==='asc'|| ul.className!=='dsc'){
     sortByPriceDsc();
   }else{
@@ -164,15 +164,15 @@ function sortByRankAsc(){
 }
 
 function sortByPriceAsc(){
-         ul.innerHTML="";
-        ul.className = "asc";
-        ascIcon();
-        data.sort(function(a,b){
-          return b.price_usd-a.price_usd;
-        })
-        return data.map(currency=> {
-        renderData(currency);
-        })
+  ul.innerHTML="";
+  ul.className = "asc";
+  ascIcon();
+  data.sort(function(a,b){
+    return b.price_usd-a.price_usd;
+  })
+  return data.map(currency=> {
+  renderData(currency);
+  })
 }
 
 function sortByPriceDsc(){
@@ -204,7 +204,6 @@ function search(){
                   });
   ul.innerHTML="";
   temp.forEach(function(item){
-    console.log(item);
     renderData(item);
   })
 }
@@ -215,28 +214,26 @@ function cardInfo(e){
           return response.json();
       }).then(function(data){
         const temp = data.filter(function(element){
-          if(element.symbol==e.target.childNodes[1].innerHTML)return element;
+            if(element.symbol==e.target.childNodes[1].innerHTML)return element;
         })
-         console.log(temp[0]);
-         console.dir(e.target.childNodes[0].src);
-         const tempImg = e.target.childNodes[0].src;
-         document.querySelector('.card-info').classList.add('show');
-         document.querySelector('#logo-one').src= tempImg;
-         document.querySelector('#id').innerHTML=`${temp[0].id}`;
-         document.querySelector('#name').innerHTML=`${temp[0].name}`;
-         document.querySelector('#symbol').innerHTML=`${temp[0].symbol}`;
-         document.querySelector('#rank').innerHTML=`${temp[0].rank}`;
-         document.querySelector('#price-usd').innerHTML=`${temp[0].price_usd}`;
-         document.querySelector('#price-bit').innerHTML=`${temp[0].price_btc}`;
-         document.querySelector('#vol-usd').innerHTML=`${temp[0]['24h_volume_usd']}`;
-         document.querySelector('#market-cap').innerHTML=`${temp[0].market_cap_usd}`;
-         document.querySelector('#available').innerHTML=`${temp[0].available_supply}`;
-         document.querySelector('#total-supply').innerHTML=`${temp[0].total_supply}`;
-         document.querySelector('#max-supply').innerHTML=`${temp[0].max_supply}`;
-         document.querySelector('#change-1d').innerHTML=`${temp[0].percent_change_1h}`;
-         document.querySelector('#change-24h').innerHTML=`${temp[0].percent_change_24h}`;
-         document.querySelector('#change-7d').innerHTML=`${temp[0].percent_change_7d}`;
-         document.querySelector('#last-updated').innerHTML=`${temp[0].last_updated}`;
+          const tempImg = e.target.childNodes[0].src;
+          document.querySelector('.card-info').classList.add('show');
+          document.querySelector('#logo-one').src= tempImg;
+          document.querySelector('#id').innerHTML=`${temp[0].id}`;
+          document.querySelector('#name').innerHTML=`${temp[0].name}`;
+          document.querySelector('#symbol').innerHTML=`${temp[0].symbol}`;
+          document.querySelector('#rank').innerHTML=`${temp[0].rank}`;
+          document.querySelector('#price-usd').innerHTML=`${temp[0].price_usd}`;
+          document.querySelector('#price-bit').innerHTML=`${temp[0].price_btc}`;
+          document.querySelector('#vol-usd').innerHTML=`${temp[0]['24h_volume_usd']}`;
+          document.querySelector('#market-cap').innerHTML=`${temp[0].market_cap_usd}`;
+          document.querySelector('#available').innerHTML=`${temp[0].available_supply}`;
+          document.querySelector('#total-supply').innerHTML=`${temp[0].total_supply}`;
+          document.querySelector('#max-supply').innerHTML=`${temp[0].max_supply}`;
+          document.querySelector('#change-1d').innerHTML=`${temp[0].percent_change_1h}`;
+          document.querySelector('#change-24h').innerHTML=`${temp[0].percent_change_24h}`;
+          document.querySelector('#change-7d').innerHTML=`${temp[0].percent_change_7d}`;
+          document.querySelector('#last-updated').innerHTML=`${temp[0].last_updated}`;
       })
 }
 

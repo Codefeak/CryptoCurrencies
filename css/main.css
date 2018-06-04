@@ -22,6 +22,7 @@
   box-shadow: 1px 1px 2px 1px;
   margin:0;
   text-shadow: 2px 2px 7px black;
+  font-size: 3em;
 }
 
 .side-bar{
@@ -57,11 +58,14 @@
 }
 
 button{
-  width:13vw;
-  margin:1vw;
+  width: -webkit-fill-available;
+  margin: 0.5vw 001vw;
+  height: 2.5vw;
   background: linear-gradient(to right, #8080801c, #0409ab8c);
   text-shadow: 2px 2px 7px #d45c5c;
   font-weight: 800;
+  border: none;
+  transition: background 3000ms;
 }
 
 button:hover{
@@ -131,8 +135,6 @@ ul::-webkit-scrollbar{
 
 }
 
-
-
 .cards{
   width:10vw;
   height:10vw;
@@ -160,11 +162,6 @@ li>h3{
 li>p{
   margin:0;
 }
-
-/* hr, .hr-std{
-  background-color: grey;
-  border-color: grey;
-} */
 
 hr{
   border-image:
