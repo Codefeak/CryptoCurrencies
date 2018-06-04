@@ -1,5 +1,5 @@
 const ul  = document.getElementById('currencies');
-const url = "https://api.coinmarketcap.com/v1/ticker/?limit=2000";
+const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
 let data=[];
 let temp;
 
@@ -165,11 +165,11 @@ function sortByRankAsc(){
 }
 
 function sortByPriceAsc(){
-  if(ul.className==='asc'||ul.className==='dsc'||ul.className==='searched'){
+  if(ul.className==='dsc'&& ul.id ==='searched'){
     ul.innerHTML="";
-    ul.className = "asc";
+    ul.classList.remove('dsc');
+    ul.classList.add('asc');
     ascIcon();
-    console.log(temp);
     temp.sort(function(a,b){
       return b.price_usd-a.price_usd;
     })
@@ -188,7 +188,7 @@ function sortByPriceAsc(){
       data.sort(function(a,b){
         return b.price_usd-a.price_usd;
       })
-      return item.map(currency=> {
+      return data.map(currency=> {
       renderData(currency);
       })
     })
@@ -196,10 +196,11 @@ function sortByPriceAsc(){
 }
 
 function sortByPriceDsc(){
-  if(ul.className==='asc'||ul.className==='dsc'||ul.className==='searched'){
+  if(ul.className==='asc' || ul.id ==='searched'){
     ul.innerHTML="";
-    ul.className = "dsc";
-    ascIcon();
+    ul.classList.remove('asc');
+    ul.classList.add('dsc');
+    dscIcon();
     temp.sort(function(a,b){
       return a.price_usd-b.price_usd;
     })
@@ -236,7 +237,7 @@ function search(){
                     }
                   });
   ul.innerHTML="";
-  ul.className="searched";
+  ul.id="searched";
   temp.forEach(function(item){
     renderData(item);
   })
@@ -290,12 +291,13 @@ function handleClick(e){
     toggleSortRank();
   if(e.target.id === 'sort-price')
     toggleSortPrice();
-  if(e.target.id ==="search")
+  if(e.target.id === "search")
     search();
   if(e.target.className ==="cards")
     cardInfo(e);
   if(e.target.id ==="currencies")
     document.querySelector('.card-info').classList.remove('show');
+  
 }
 
 function handleInput(e){
