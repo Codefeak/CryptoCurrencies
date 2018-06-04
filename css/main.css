@@ -1,6 +1,7 @@
 *{
   color:white;
   background: transparent;
+  font-size:1vw;
 }
 
 .main-container{
@@ -134,7 +135,7 @@ ul::-webkit-scrollbar{
 
 .cards{
   width:10vw;
-  height:23vh;
+  height:10vw;
   background:linear-gradient(#4465ea82, #001233a8);
   margin:2vw;
   text-align: center;
@@ -148,12 +149,16 @@ ul::-webkit-scrollbar{
 }
 
 li>img{
-margin:0.5vh;
+margin:0.5vw;
 }
 
 li>h3{
   color: #d4ea82;
     text-shadow: 2px 2px 7px black;
+    margin: 0;
+}
+li>p{
+  margin:0;
 }
 
 /* hr, .hr-std{
