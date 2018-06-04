@@ -230,7 +230,7 @@ function search(){
   const input = document.querySelector('#input');
   temp = data.filter(function(element){
                   if(element.symbol.toLowerCase().includes(input.value)||
-                    element.name.includes(input.value.toUpperCase())&&
+                    element.name.toLowerCase().includes(input.value.toLowerCase())&&
                     input.value!==""){
                       return element;
                     }
