@@ -1,6 +1,7 @@
 const ul  = document.getElementById('currencies');
 const url = "https://api.coinmarketcap.com/v1/ticker/?limit=20";
 let data=[];
+let temp;
 
 document.addEventListener('click', handleClick);
 document.addEventListener('input', handleInput);
@@ -164,19 +165,49 @@ function sortByRankAsc(){
 }
 
 function sortByPriceAsc(){
-  ul.innerHTML="";
-  ul.className = "asc";
-  ascIcon();
-  data.sort(function(a,b){
-    return b.price_usd-a.price_usd;
-  })
-  return data.map(currency=> {
-  renderData(currency);
-  })
+  if(ul.className==='asc'||ul.className==='dsc'||ul.className==='searched'){
+    ul.innerHTML="";
+    ul.className = "asc";
+    ascIcon();
+    console.log(temp);
+    temp.sort(function(a,b){
+      return b.price_usd-a.price_usd;
+    })
+    return temp.map(currency=> {
+    renderData(currency);
+    })
+  }else{
+   fetch(url)
+      .then(function(response){
+        return response.json();
+    })
+    .then(data => {
+      ul.innerHTML="";
+      ul.className = "asc";
+      ascIcon();
+      data.sort(function(a,b){
+        return b.price_usd-a.price_usd;
+      })
+      return item.map(currency=> {
+      renderData(currency);
+      })
+    })
+  }
 }
 
 function sortByPriceDsc(){
-  fetch(url)
+  if(ul.className==='asc'||ul.className==='dsc'||ul.className==='searched'){
+    ul.innerHTML="";
+    ul.className = "dsc";
+    ascIcon();
+    temp.sort(function(a,b){
+      return a.price_usd-b.price_usd;
+    })
+    return temp.map(currency=> {
+    renderData(currency);
+    })
+  }else{
+    fetch(url)
         .then(function(response){
           return response.json();
       })
@@ -191,11 +222,13 @@ function sortByPriceDsc(){
         renderData(currency);
         })
       })
+  }
+  
 }
 
 function search(){
   const input = document.querySelector('#input');
-  const temp = data.filter(function(element){
+  temp = data.filter(function(element){
                   if(element.symbol.toLowerCase().includes(input.value)||
                     element.name.includes(input.value.toUpperCase())&&
                     input.value!==""){
@@ -203,6 +236,7 @@ function search(){
                     }
                   });
   ul.innerHTML="";
+  ul.className="searched";
   temp.forEach(function(item){
     renderData(item);
   })
